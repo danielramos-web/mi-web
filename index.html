@@ -1,23 +1,6 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Datos en Tiempo Real</title>
-</head>
-<body>
-    <h1>Datos de Arduino</h1>
-    <p>Temperatura: <span id="temp">--</span>°C</p>
-    <p>Humedad: <span id="hum">--</span>%</p>
 
-    <script>
-        async function obtenerDatos() {
-            const response = await fetch("https://arduino-datos.firebaseio.com/datos.json"); // Reemplaza con tu URL de Firebase
-            const data = await response.json();
-            document.getElementById("temp").innerText = data.temperatura;
-            document.getElementById("hum").innerText = data.humedad;
-        }
-        setInterval(obtenerDatos, 5000); // Actualizar cada 5 segundos
-    </script>
-</body>
-</html>
+<?php
+
+echo "hello word"
+>?
