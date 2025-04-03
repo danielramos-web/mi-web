@@ -3,13 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página en GitHub Pages</title>
+    <title>Datos desde Arduino a Firebase</title>
+    <!-- Importar Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
 </head>
 <body>
-    <h1 id="mensaje"></h1>
+    <h1>Datos desde Arduino</h1>
+    <p>Temperatura: <span id="temp">Cargando...</span>°C</p>
+    <p>Humedad: <span id="hum">Cargando...</span>%</p>
 
     <script>
-        document.getElementById("mensaje").innerText = "Hello World";
+        // Configuración de Firebase (reemplaza con tus datos)
+        const firebaseConfig = {
+            apiKey: "TU_API_KEY",
+            authDomain: "TU_PROYECTO.firebaseapp.com",
+            databaseURL: "https://TU_PROYECTO.firebaseio.com",
+            projectId: "TU_PROYECTO",
+            storageBucket: "TU_PROYECTO.appspot.com",
+            messagingSenderId: "TU_MESSAGING_SENDER_ID",
+            appId: "TU_APP_ID"
+        };
+
+        // Inicializar Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        // Función para obtener y mostrar los datos en la página
+        function mostrarDatos(snapshot) {
+            const data = snapshot.val();
+            // Muestra los datos de temperatura y humedad en la página
+            document.getElementById("temp").innerText = data.temperatura || "No disponible";
+            document.getElementById("hum").innerText = data.humedad || "No disponible";
+        }
+
+        // Escuchar los cambios en la base de datos de Firebase
+        firebase.database().ref("sensores").on("value", mostrarDatos);
     </script>
 </body>
 </html>
